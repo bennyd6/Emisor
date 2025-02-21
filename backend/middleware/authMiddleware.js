@@ -16,13 +16,12 @@ const authMiddleware = (req, res, next) => {
         const decoded = verify(tokenWithoutBearer, process.env.JWT_SECRET);
         console.log("Decoded Token:", decoded); // Log the decoded token
 
-        if (!decoded.id ) {
+        if (!decoded.id) {
             return res.status(400).json({ message: "Invalid token. Missing user details." });
         }
 
         req.user = {
-            id: decoded.id,
-            
+            id: decoded.id, // Ensure the user ID is passed to req.user
         };
 
         next();
@@ -31,5 +30,6 @@ const authMiddleware = (req, res, next) => {
         return res.status(400).json({ message: "Invalid token." });
     }
 };
+
 
 export default authMiddleware;

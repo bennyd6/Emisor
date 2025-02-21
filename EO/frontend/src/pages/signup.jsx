@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './signup.css';
+// import './Signup.css';
 
 export default function Signup() {
     const [formData, setFormData] = useState({
@@ -36,14 +36,14 @@ export default function Signup() {
         if (!validateForm()) return;
 
         try {
-            const response = await axios.post('http://localhost:3000/api/auth/User/register', {
+            const response = await axios.post('http://localhost:3000/api/auth/Eo/register', {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password
             });
 
             if (response.data && response.data.token) {
-                localStorage.setItem('token', response.data.authtoken);
+                localStorage.setItem('authToken', response.data.token);
                 alert('Signup successful!');
                 navigate('/dashboard'); // Redirect to the dashboard after successful signup
             } else {
