@@ -13,7 +13,7 @@ const authMiddleware = (req, res, next) => {
         const tokenWithoutBearer = token.replace("Bearer ", ""); // Remove "Bearer " prefix
         console.log("Token After Processing:", tokenWithoutBearer);
 
-        const decoded = verify(tokenWithoutBearer, process.env.JWT_SECRET);
+        const decoded = verify(tokenWithoutBearer, "process.env.JWT_SECRET");
         console.log("Decoded Token:", decoded); // Log the decoded token
 
         if (!decoded.id) {
