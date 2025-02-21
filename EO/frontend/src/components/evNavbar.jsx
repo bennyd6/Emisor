@@ -1,32 +1,26 @@
-import './navbar.css';
+import './evNavbar.css';
 import { NavLink } from 'react-router-dom';
 
-export default function Navbar() {
+export default function EvNavbar() {
   return (
-    <div className="nav-main">
-      <NavLink
-        to="/"
-        className={({ isActive }) => (isActive ? 'active' : '')}
-      >
-        Home
-      </NavLink>
+    <div className="ev-main">
       <NavLink
         to="/ongoing-events"
         className={({ isActive }) => (isActive ? 'active' : '')}
       >
-        Events
+        Ongoing
       </NavLink>
       <NavLink
-        to="/chat"
+        to="/upcoming-events"
         className={({ isActive }) => (isActive ? 'active' : '')}
       >
-        Chat
+        Upcoming
       </NavLink>
       <NavLink
-        to="/settings"
+        to="/past-events"
         className={({ isActive }) => (isActive ? 'active' : '')}
       >
-        Settings
+        Past
       </NavLink>
     </div>
   );

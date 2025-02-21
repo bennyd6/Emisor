@@ -1,46 +1,24 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-// import EventForm from './pages/event'
-
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <EventForm></EventForm>
-//     </>
-//   )
-// }
-
-// export default App
-
-
-import React, { useEffect, useState } from "react";
-import { contract } from "./web3";
+import './App.css';
+import Header from './components/header';
+import Navbar from './components/navbar';
+import Home from './pages/home';
+import Event from './pages/event';
+import Chat from './pages/chat';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [eventName, setEventName] = useState("");
-
-  useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        const name = await contract.eventName(); // Example function
-        setEventName(name);
-      } catch (error) {
-        console.error("Error fetching event:", error);
-      }
-    };
-    fetchEvent();
-  }, []);
-
   return (
-    <div>
-      <h1>Event Ticketing System</h1>
-      <p>Event Name: {eventName}</p>
-    </div>
+    <Router>
+      <Header />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ongoing-events" element={<Event />} />
+        <Route path="/upcoming-events" element={<Event />} />
+        <Route path="/past-events" element={<Event />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -16,12 +16,12 @@ export default function Navbar() {
       >
         Events
       </NavLink>
-      <NavLink
+      {/* <NavLink
         to="/chat"
         className={({ isActive }) => (isActive ? 'active' : '')}
       >
         Chat
-      </NavLink>
+      </NavLink> */}
       <NavLink
         to="/settings"
         className={({ isActive }) => (isActive ? 'active' : '')}
