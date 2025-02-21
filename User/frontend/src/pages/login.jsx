@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
-// import logo from '../assets/verna-logo.png';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './login.css';
 
 export default function Login() {
-    const [credentials, setCredentials] = useState({ phone: '', password: '' });
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate(); // Initialize navigate for redirection
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -14,25 +15,23 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/api/auth/login', credentials);
+            const response = await axios.post('http://localhost:3000/api/auth/User/login', credentials);
             alert('Login successful!');
-            localStorage.setItem('authToken', response.data.authtoken); 
+            localStorage.setItem('authToken', response.data.token);
+            navigate('/upcoming-event'); // Redirect to the dashboard after successful login
         } catch (error) {
-            console.error(error.response.data);
-            alert('Invalid phone number or password');
+            console.error(error.response?.data || error.message);
+            alert('Invalid email or password');
         }
     };
 
     return (
         <div className="login-main">
-            <div className="login-main-one">
-                <img src={logo} alt="Logo" />
-            </div>
             <div className="login-main-two">
                 <div className="login-card">
                     <h2>Login</h2>
                     <form className='login-form' onSubmit={handleSubmit}>
-                        <input type="text" name="phone" placeholder='Enter your phone number' onChange={handleChange} required className='id-and-pass'/>
+                        <input type="email" name="email" placeholder='Enter your email' onChange={handleChange} required className='id-and-pass'/>
                         <input type={showPassword ? "text" : "password"} name="password" className='id-and-pass' placeholder='Enter your password' onChange={handleChange} required />
                         <div className="show-pass">
                             <input type="checkbox" onChange={() => setShowPassword(!showPassword)} />

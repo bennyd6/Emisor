@@ -20,6 +20,13 @@
     justify-content:flex-start;
 }
 
+.header-2{
+    align-items:center;
+    justify-content:flex-end;
+    padding-right: 40px;
+    color: white;
+}
+
 .header-1 img{
     width: 140px;
     margin-left: 20px;

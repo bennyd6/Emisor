@@ -4,7 +4,8 @@ import Navbar from './components/navbar';
 import Home from './pages/home';
 import Event from './pages/event';
 import Chat from './pages/chat';
-import Login from './pages/login'; 
+import Login from './pages/login';
+import Signup from './pages/signup'; // Import Signup component
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 
 function App() {
@@ -19,11 +20,11 @@ function MainApp() {
   const token = localStorage.getItem('authToken'); // Check if token is in localStorage
   const location = useLocation();
 
-  const isAuthPage = location.pathname === '/login'; // Check if the user is on the login page
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup'; // Check if the user is on login or signup page
 
   return (
     <div className="main">
-      {/* Show Header and Navbar only if not on the login page */}
+      {/* Show Header and Navbar only if not on the login or signup page */}
       {!isAuthPage && (
         <>
           <Header />
@@ -41,8 +42,9 @@ function MainApp() {
         <Route path="/upcoming-events" element={token ? <Event /> : <Navigate to="/login" />} />
         <Route path="/past-events" element={token ? <Event /> : <Navigate to="/login" />} />
 
-        {/* Login Page */}
+        {/* Auth Pages */}
         <Route path="/login" element={token ? <Navigate to="/" /> : <Login />} />
+        <Route path="/signup" element={token ? <Navigate to="/" /> : <Signup />} /> {/* Signup Route */}
         
         {/* Optional fallback route for undefined paths */}
         <Route path="*" element={<h1>Page Not Found</h1>} />

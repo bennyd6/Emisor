@@ -9,7 +9,7 @@ export default function Header(){
                 <img src={logo} alt="" />
             </div>
             <div className="header-2">
-
+                <h2>User</h2>
             </div>
         </div>
         </>
