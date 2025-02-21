@@ -51,7 +51,7 @@ router.post("/User/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, "process.env.JWT_SECRET", {
       expiresIn: "10h",
     });
     console.log(token);
@@ -79,7 +79,7 @@ router.post("/User/register", async (req, res) => {
     const newUser = new User({ name, email, password });
     await newUser.save();
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, "process.env.JWT_SECRET", {
       expiresIn: "10h",
     });
 
@@ -105,7 +105,7 @@ router.post("/Eo/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    const token = jwt.sign({ id: eo._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: eo._id }, "process.env.JWT_SECRET", {
       expiresIn: "10h",
     });
 
@@ -132,7 +132,7 @@ router.post("/Eo/register", async (req, res) => {
     const newEo = new Eo({ name, email, password });
     await newEo.save();
 
-    const token = jwt.sign({ id: newEo._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: newEo._id }, "process.env.JWT_SECRET", {
       expiresIn: "10h",
     });
 
