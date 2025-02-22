@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import './addEvent.css';
+import './addEvent.css';
 
 export default function AddEvent() {
     const [eventData, setEventData] = useState({
@@ -61,7 +61,7 @@ export default function AddEvent() {
 
     return (
         <div className="add-event-main">
-            <h2>Create a New Event</h2>
+            {/* <h2>Create a New Event</h2> */}
             <form onSubmit={handleSubmit}>
                 <label>
                     Event Name:
