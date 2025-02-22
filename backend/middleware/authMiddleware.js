@@ -13,7 +13,7 @@ const authMiddleware = (req, res, next) => {
         const tokenWithoutBearer = token.startsWith("Bearer ") ? token.split(" ")[1] : token;
         
         // Verify the token
-        const decoded = verify(tokenWithoutBearer, process.env.JWT_SECRET);
+        const decoded = verify(tokenWithoutBearer, "process.env.JWT_SECRET");
 
         if (!decoded || !decoded.id) {
             return res.status(400).json({ message: "Invalid token. Missing user details." });
