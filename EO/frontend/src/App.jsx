@@ -6,7 +6,7 @@ import Event from './pages/event';
 import Login from './pages/login';
 import AddEvent from './pages/AddEvent';
 import Signup from './pages/signup'; // Import Signup component
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
@@ -17,9 +17,7 @@ function App() {
 }
 
 function MainApp() {
-  const token = localStorage.getItem('authToken'); // Check if token is in localStorage
   const location = useLocation();
-
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup'; // Check if the user is on login or signup page
 
   return (
@@ -34,18 +32,18 @@ function MainApp() {
 
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/" element={<Home />} />
 
-        {/* Protected Routes for events */}
-        <Route path="/ongoing-events" element={token ? <Event /> : <Navigate to="/login" />} />
-        <Route path="/upcoming-events" element={token ? <Event /> : <Navigate to="/login" />} />
-        <Route path="/past-events" element={token ? <Event /> : <Navigate to="/login" />} />
-        <Route path="/add-event" element={token ?<AddEvent />: <Navigate to="/login" />}/>
+        {/* Routes for events */}
+        <Route path="/ongoing-events" element={<Event />} />
+        <Route path="/upcoming-events" element={<Event />} />
+        <Route path="/past-events" element={<Event />} />
+        <Route path="/add-event" element={<AddEvent />} />
 
         {/* Auth Pages */}
-        <Route path="/login" element={token ? <Navigate to="/" /> : <Login />} />
-        <Route path="/signup" element={token ? <Navigate to="/" /> : <Signup />} /> {/* Signup Route */}
-        
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
         {/* Optional fallback route for undefined paths */}
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
