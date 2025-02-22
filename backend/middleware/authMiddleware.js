@@ -1,35 +1,31 @@
 import pkg from 'jsonwebtoken';
 const { verify } = pkg;
+
 const authMiddleware = (req, res, next) => {
-    const token = req.header("Authorization");
-
-    console.log("Received Token:", token); // Log the received token
-
-    if (!token) {
-        return res.status(401).json({ message: "Access denied. No token provided." });
-    }
-
     try {
-        const tokenWithoutBearer = token.replace("Bearer ", ""); // Remove "Bearer " prefix
-        console.log("Token After Processing:", tokenWithoutBearer);
+        const token = req.header("Authorization");
+        
+        if (!token) {
+            return res.status(401).json({ message: "Access denied. No token provided." });
+        }
 
-        const decoded = verify(tokenWithoutBearer, "process.env.JWT_SECRET");
-        console.log("Decoded Token:", decoded); // Log the decoded token
+        // Remove "Bearer " prefix if present
+        const tokenWithoutBearer = token.startsWith("Bearer ") ? token.split(" ")[1] : token;
+        
+        // Verify the token
+        const decoded = verify(tokenWithoutBearer, process.env.JWT_SECRET);
 
-        if (!decoded.id) {
+        if (!decoded || !decoded.id) {
             return res.status(400).json({ message: "Invalid token. Missing user details." });
         }
 
-        req.user = {
-            id: decoded.id, // Ensure the user ID is passed to req.user
-        };
+        req.user = { id: decoded.id };  // Attach user ID to request
+        next();  // Proceed to the next middleware
 
-        next();
     } catch (error) {
-        console.error("JWT Verification Error:", error);
-        return res.status(400).json({ message: "Invalid token." });
+        console.error("JWT Verification Error:", error.message);
+        return res.status(401).json({ message: "Invalid token or expired session." });
     }
 };
-
 
 export default authMiddleware;

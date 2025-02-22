@@ -6,6 +6,8 @@ import Event from './pages/event';
 import Chat from './pages/chat';
 import Login from './pages/login';
 import Signup from './pages/signup'; // Import Signup component
+import UpcomingEvents from './pages/upcomingEvents';
+import PastEvents from './pages/pastEvents';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 
 function App() {
@@ -39,8 +41,8 @@ function MainApp() {
 
         {/* Protected Routes for events */}
         <Route path="/ongoing-events" element={token ? <Event /> : <Navigate to="/login" />} />
-        <Route path="/upcoming-events" element={token ? <Event /> : <Navigate to="/login" />} />
-        <Route path="/past-events" element={token ? <Event /> : <Navigate to="/login" />} />
+        <Route path="/upcoming-events" element={token ? <UpcomingEvents /> : <Navigate to="/login" />} />
+        <Route path="/past-events" element={token ? <PastEvents /> : <Navigate to="/login" />} />
 
         {/* Auth Pages */}
         <Route path="/login" element={token ? <Navigate to="/" /> : <Login />} />

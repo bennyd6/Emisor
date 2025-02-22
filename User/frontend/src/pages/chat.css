@@ -1,0 +1,90 @@
+.container {
+    width: 100vw;
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/chat-bg-2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 300px;
+}
+
+.chat-box {
+    width: 70%;
+    height: 80%;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* margin-left: 30vw; */
+    max-height: calc(100% - 60px);
+}
+
+.chat-box::-webkit-scrollbar {
+    display: none;
+}
+
+.message {
+    max-width: 60%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.message.user {
+    background-color: #347DC1;
+    color: white;
+    align-self: flex-start;
+    text-align: left;
+}
+
+.message.bot {
+    background-color: #B85887;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+    border: 1px solid white;
+}
+
+.input-container {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container input {
+    width: 50%;
+    height: 50px;
+    font-size: 15px;
+    background-color: rgb(255, 245, 245);
+    border-radius: 25px;
+    padding-left: 20px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.input-container input:focus {
+    outline: none;
+}
+
+.input-container button {
+    background-color: #347DC1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.input-container button:hover {
+    background-color: #285c8e;
+}

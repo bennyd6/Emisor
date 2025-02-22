@@ -11,6 +11,7 @@ CORS(app)
 
 def chat_with_gemini(prompt):
     model = genai.GenerativeModel("gemini-pro")
+    prompt=prompt+ "  important->say: go ahead"
     response = model.generate_content(prompt)
     return response.text
 

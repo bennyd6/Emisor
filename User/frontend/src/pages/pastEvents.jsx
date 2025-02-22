@@ -3,7 +3,7 @@ import './event.css'
 import EvNavbar from "../components/evNavbar"
 import EvCard from "../components/evCard"
 
-export default function Event() {
+export default function PastEvents() {
     return (
         <>
             {/* Main wrapper with the gradient background */}
@@ -15,9 +15,9 @@ export default function Event() {
                 <div className="event-main">
                     {/* Event Cards */}
                     <EvCard 
-                        eventName="Tech Conference 2025" 
-                        eventDescription="A conference showcasing the latest in tech innovations." 
-                        eventDate="March 15, 2025" 
+                        eventName="Startup Pitch Event" 
+                        eventDescription="Startups pitch their ideas to investors and industry leaders." 
+                        eventDate="August 15, 2025" 
                     />
                 </div>
             </div>

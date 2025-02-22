@@ -23,16 +23,21 @@ export default function AddEvent() {
       const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('authToken');
+        
+        if (!token) {
+            alert('You must be logged in to create an event');
+            return;
+        }
     
-        // Make sure you're sending the correct data
+        // Proceed with the event creation if token exists
         try {
             const response = await fetch('http://localhost:3000/api/auth/Eo/events', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // If you have a token from login
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(eventData), // Send the correct event data
+                body: JSON.stringify(eventData),
             });
     
             if (!response.ok) {
@@ -42,9 +47,8 @@ export default function AddEvent() {
             const data = await response.json();
             alert(data.message);
     
-            // Update this to reference 'data.event._id'
             if (data.event && data.event._id) {
-                const ticketLink = `http://localhost:5173/ticket/${data.event._id}`; // Adjust this URL based on your route
+                const ticketLink = `http://localhost:5173/ticket/${data.event._id}`;
                 setEventLink(ticketLink);
             }
         } catch (error) {
@@ -52,6 +56,7 @@ export default function AddEvent() {
             alert('Error creating event');
         }
     };
+    
       
 
     return (

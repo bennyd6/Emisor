@@ -18,7 +18,7 @@ export default function Login() {
             const response = await axios.post('https://emisor.onrender.com/api/auth/User/login', credentials);
             alert('Login successful!');
             localStorage.setItem('authToken', response.data.token);
-            navigate('/upcoming-event'); // Redirect to the dashboard after successful login
+            navigate('/'); // Redirect to the dashboard after successful login
         } catch (error) {
             console.error(error.response?.data || error.message);
             alert('Invalid email or password');
